@@ -29,15 +29,15 @@ st.plotly_chart(fig)
 
 
 #A checkbox of displaying unique paint colors
-
+st.subheader("Total amount spent on any particular color")
 unique_colors = df['paint_color'].dropna().unique()
 selected_colors = st.multiselect('Select Paint Colors', unique_colors)
 
 if selected_colors:
     filtered_data = df[df['paint_color'].isin(selected_colors)]
-    bar_fig = px.bar(filtered_data, x='paint_color', y='price', title='Average Vehicle Price by Selected Paint Colors')
+    avg_price_data = filtered_data.groupby('paint_color')['price'].mean().reset_index()
+    bar_fig = px.bar(avg_price_data, x='paint_color', y='price', title='Average Vehicle Price by Selected Paint Colors')
     st.plotly_chart(bar_fig)
 else:
     st.write("Please select at least one color to display the prices.")
-
 
