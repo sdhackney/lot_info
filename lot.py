@@ -29,7 +29,7 @@ st.plotly_chart(fig)
 
 
 #A checkbox of displaying unique paint colors
-st.subheader("Total amount spent on any particular color")
+st.subheader("Average Vehicle Price by Color")
 unique_colors = df['paint_color'].dropna().unique()
 selected_colors = st.multiselect('Select Paint Colors', unique_colors)
 
