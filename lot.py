@@ -16,3 +16,13 @@ if st.checkbox('Show Price Distribution Histogram'):
 st.subheader("Price vs Odometer Reading")
 fig_scatter = px.scatter(df, x='odometer', y='price', title='Price vs Odometer Reading')
 st.plotly_chart(fig_scatter)
+
+
+filtered_data = df.dropna(subset=['price', 'paint_color'])
+
+color_price_group = filtered_data.groupby('paint_color')['price'].mean().reset_index()
+
+fig = px.bar(color_price_group, x='paint_color', y='price', title='Average Vehicle Price by Paint Color')
+
+fig.show()
+
